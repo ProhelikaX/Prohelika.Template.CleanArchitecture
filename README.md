@@ -9,7 +9,7 @@
 ## How to use?
 
 ---------------------
----------------------
+
 ### 1. Installation
 
 ---------------------
@@ -37,7 +37,6 @@
 6. Run `docker ps` to check if the containers are running
 
 
------------------
 -----------------
 
 ## Contributing
