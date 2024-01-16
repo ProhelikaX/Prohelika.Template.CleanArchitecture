@@ -1,0 +1,22 @@
+@page "/account/logout"
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Authentication.OpenIdConnect
+@using Microsoft.AspNetCore.Authentication
+
+@code {
+    [Inject] private NavigationManager NavigationManager { get; set; }
+    
+    [Inject] private IHttpContextAccessor Accessor { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        if (Accessor.HttpContext != null)
+        {
+            await Accessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            await Accessor.HttpContext.SignOutAsync(OpenIdConnectDefaults.AuthenticationScheme);
+        }
+
+        NavigationManager.NavigateTo("/");
+    }
+
+}

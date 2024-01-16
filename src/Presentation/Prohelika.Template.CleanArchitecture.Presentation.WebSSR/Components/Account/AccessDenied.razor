@@ -1,0 +1,28 @@
+@page "/Account/AccessDenied"
+<h3>Access Denied</h3>
+
+<p>
+    You do not have access to this resource.
+</p>
+
+@code {
+    [Inject] private IHttpContextAccessor Accessor { get; set; }
+
+    [Parameter] [SupplyParameterFromQuery] public string? RedirectUri { get; set; }
+
+    [CascadingParameter] public Task<AuthenticationState> AuthenticationState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Accessor.HttpContext != null)
+        {
+            var state = await AuthenticationState;
+
+            var isin = state.User.IsInRole("admin");
+
+            Console.WriteLine(isin);
+        }
+    }
+
+
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json.schemastore.org/template",
+  "author": "Prohelika",
+  "classifications": [
+    "Solution"
+  ],
+  "identity": "Prohelika.Template.CleanArchitecture.Solution",
+  "groupIdentity": "Prohelika.Template.CleanArchitecture.Solution",
+  "shortName": "pro-clean-arch",
+  "name": "Prohelika.Template.CleanArchitecture.Solution",
+  "description": "Clean Architecture Solution template for .NET",
+  "preferNameDirectory": true,
+  "precedence": 1,
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "sourceName": "Prohelika.Template.CleanArchitecture",
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [ ".vs/**", ".idea/**", ".git/**", ".DS_Store" ]
+        }
+      ]
+    }
+  ]
+}

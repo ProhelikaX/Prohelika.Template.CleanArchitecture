@@ -1,0 +1,23 @@
+﻿@if (AuthState?.User.Identity?.IsAuthenticated == true)
+{
+    <span>Hello, @AuthState.User.Identity?.Name</span>
+    <a class="nav-link btn btn-link" href="/account/logout"> Log out</a>
+}
+else
+{
+    <a href="/account/login">Log in</a>
+}
+
+
+@code
+{
+
+    [CascadingParameter] public Task<AuthenticationState>? AuthenticationState { get; set; }
+
+    private AuthenticationState? AuthState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (AuthenticationState != null) AuthState = await AuthenticationState;
+    }
+}

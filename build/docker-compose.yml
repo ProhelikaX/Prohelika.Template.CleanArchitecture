@@ -1,0 +1,52 @@
+﻿volumes:
+  db.data:
+    driver: local
+  
+  files:
+    driver: local
+
+services:
+  db:
+    image: postgres:16.1-alpine
+    environment:
+      POSTGRES_USER: db.user
+      POSTGRES_PASSWORD: db.password
+      POSTGRES_DB: db.name
+    ports:
+      - "5432:5432"
+    volumes:
+      - db.data:/var/lib/postgresql/data
+  
+  webapi:
+    image: prohelika.template.cleanarchitecture.webapi:latest
+    build:
+      context: ..
+      dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebAPI/Dockerfile
+    ports:
+      - "8001:8080"
+    depends_on:
+      - db
+    restart: unless-stopped
+  
+  webcsr:
+    image: prohelika.template.cleanarchitecture.webcsr:latest
+    build:
+      context: ..
+      dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebCSR/Dockerfile
+    ports:
+      - "8081:80"
+    depends_on:
+      - webapi
+    restart: unless-stopped
+
+  webssr:
+    image: prohelika.template.cleanarchitecture.webssr:latest
+    build:
+      context: ..
+      dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebSSR/Dockerfile
+    ports:
+      - "8082:8080"
+    depends_on:
+      - webapi
+    restart: unless-stopped
+

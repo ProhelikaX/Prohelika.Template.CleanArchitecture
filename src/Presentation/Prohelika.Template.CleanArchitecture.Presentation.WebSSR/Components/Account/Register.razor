@@ -1,0 +1,21 @@
+@page "/Account/Register"
+@using Prohelika.Template.CleanArchitecture.Presentation.Common.Utils
+
+<h3>Register</h3>
+
+@code {
+    [Inject] private NavigationManager NavigationManager { get; set; }
+
+    [Inject] private IConfiguration Configuration { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        var openIdConnectOptions =
+            Configuration.GetSection(OpenIdConnectConfigurationOptions.Key).Get<OpenIdConnectConfigurationOptions>();
+
+        NavigationManager.NavigateTo(openIdConnectOptions.Authority);
+
+        return base.OnInitializedAsync();
+    }
+
+}

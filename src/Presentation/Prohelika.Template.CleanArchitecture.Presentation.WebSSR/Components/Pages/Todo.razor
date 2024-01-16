@@ -1,0 +1,54 @@
+@page "/Todo"
+
+@using Prohelika.Template.CleanArchitecture.Application.Features.Todos
+@using Prohelika.Template.CleanArchitecture.Presentation.Common.Utils
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize(policy: AppAuthPolicy.IsAdmin)]
+
+<h3>Todos</h3>
+
+<table class="table">
+    <thead>
+    <th>#</th>
+    <th>Title</th>
+    <th>Completed</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    @foreach (var (todo, i) in Todos.Select((todo, i) => (todo, i)))
+    {
+        <tr>
+            <td>@(i + 1)</td>
+            <td>@todo.Title</td>
+            <td>
+                <InputCheckbox @bind-Value="todo.Completed" disabled="true"/>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+    [Inject] private HttpClient Http { get; set; }
+    private IList<TodoDto> Todos { get; set; } = new List<TodoDto>();
+
+    protected override Task OnInitializedAsync()
+    {
+        return Get();
+    }
+
+    private async Task Get()
+    {
+        try
+        {
+            Todos = await Http.GetFromJsonAsync<IList<TodoDto>>("Todo") ?? new List<TodoDto>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+
+}

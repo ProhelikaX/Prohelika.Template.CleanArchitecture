@@ -1,0 +1,51 @@
+@page "/User"
+@using System.Text.Json
+@using System.Security.Claims
+
+<h1>@AuthenticatedUser.Identity?.Name</h1>
+
+<h2>Claims</h2>
+
+@foreach (var claim in AuthenticatedUser.Claims)
+{
+    <p class="claim">@(claim.Type): @claim.Value</p>
+}
+
+<h2>Access token</h2>
+
+<p id="access-token">@AccessToken</p>
+
+<h2>Access token claims</h2>
+
+@foreach (var claim in GetAccessTokenClaims() ?? new Dictionary<string, object>())
+{
+    <p>@(claim.Key): @claim.Value.ToString()</p>
+}
+
+@code {
+    [CascadingParameter] private Task<AuthenticationState> AuthenticationState { get; set; }
+
+    private ClaimsPrincipal AuthenticatedUser { get; set; }
+    private string AccessToken { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        var state = await AuthenticationState;
+        // AccessToken = await Accessor.HttpContext.GetTokenAsync("access_token");
+
+        AuthenticatedUser = state.User;
+    }
+
+    private IDictionary<string, object>? GetAccessTokenClaims()
+    {
+        // header.payload.signature
+        var payload = AccessToken.Split(".")[1];
+        var base64Payload = payload.Replace('-', '+').Replace('_', '/')
+            .PadRight(payload.Length + (4 - payload.Length % 4) % 4, '=');
+
+        return JsonSerializer.Deserialize<IDictionary<string, object>>(
+            Convert.FromBase64String(base64Payload));
+    }
+
+}

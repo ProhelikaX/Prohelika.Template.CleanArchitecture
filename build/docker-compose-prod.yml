@@ -1,0 +1,73 @@
+﻿networks:
+  default:
+    name: reverse-proxy
+    external: true
+
+volumes:
+  db.data:
+    driver: local
+  
+  files:
+    driver: local
+
+services:
+  db:
+    image: postgres:16.1-alpine
+    environment:
+      POSTGRES_USER: db.user
+      POSTGRES_PASSWORD: db.password
+      POSTGRES_DB: db.name
+    ports:
+      - "5432"
+    volumes:
+      - db.data:/var/lib/postgresql/data
+    restart: unless-stopped
+  
+  webapi:
+    image: prohelika.template.cleanarchitecture.webapi:latest
+    build:
+      context: ..
+      dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebAPI/Dockerfile
+    environment:
+      - VIRTUAL_HOST=prohelika.template.cleanarchitecture
+      - VIRTUAL_PATH=/api,/swagger
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=prohelika.template.cleanarchitecture
+      - LETSENCRYPT_EMAIL=admin@prohelika.template.cleanarchitecture
+    expose:
+      - 8080
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  webcsr:
+    image: prohelika.template.cleanarchitecture.webcsr:latest
+    build:
+      context: ..
+      dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebCSR/Dockerfile
+    environment:
+      - VIRTUAL_HOST=dashboard.prohelika.template.cleanarchitecture
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=dashboard.prohelika.template.cleanarchitecture
+      - LETSENCRYPT_EMAIL=admin@prohelika.template.cleanarchitecture
+    expose:
+      - 80
+    depends_on:
+      - webapi
+    restart: unless-stopped
+
+  webssr:
+    image: prohelika.template.cleanarchitecture.webssr:latest
+    build:
+      context: ..
+      dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebSSR/Dockerfile
+    environment:
+      - VIRTUAL_HOST=prohelika.template.cleanarchitecture, www.prohelika.template.cleanarchitecture
+      - VIRTUAL_PORT=8080
+      - LETSENCRYPT_HOST=prohelika.template.cleanarchitecture, www.prohelika.template.cleanarchitecture
+      - LETSENCRYPT_EMAIL=admin@prohelika.template.cleanarchitecture
+    expose:
+      - 8080
+    depends_on:
+      - webapi
+    restart: unless-stopped

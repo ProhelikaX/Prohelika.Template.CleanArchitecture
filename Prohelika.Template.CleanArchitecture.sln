@@ -1,0 +1,119 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C3FFAE90-A599-4F06-BE7A-AC05BDFA824E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{797378FD-2132-4D71-9051-9BCB88AC6CA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2499E091-1E43-4B40-A409-D1C56600F20D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{46FB83BB-E0C1-42DD-9726-31B77AE95D31}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{481DE728-5BE0-481B-B043-D205E0D360B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{F94A2758-2BDB-4658-BA9C-516DD48C210A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Infrastructure.Common", "src\Infrastructure\Prohelika.Template.CleanArchitecture.Infrastructure.Common\Prohelika.Template.CleanArchitecture.Infrastructure.Common.csproj", "{D136B88C-2EF5-4F88-B728-4E6FBD766DB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Domain.Common", "src\Domain\Prohelika.Template.CleanArchitecture.Domain.Common\Prohelika.Template.CleanArchitecture.Domain.Common.csproj", "{4C333B83-A05D-4824-9652-B169F664D60A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Presentation.Common", "src\Presentation\Prohelika.Template.CleanArchitecture.Presentation.Common\Prohelika.Template.CleanArchitecture.Presentation.Common.csproj", "{2A8C9C8A-9DB4-4484-A89F-C92556EA18BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Application.Common", "src\Application\Prohelika.Template.CleanArchitecture.Application.Common\Prohelika.Template.CleanArchitecture.Application.Common.csproj", "{35823AF9-51A1-49D2-9755-939D9D4735B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Application", "src\Application\Prohelika.Template.CleanArchitecture.Application\Prohelika.Template.CleanArchitecture.Application.csproj", "{B24AF84C-DE66-4975-98C5-E872AC41D3CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Domain", "src\Domain\Prohelika.Template.CleanArchitecture.Domain\Prohelika.Template.CleanArchitecture.Domain.csproj", "{CF7F5E51-DA33-4742-AD84-2847E4389F87}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Infrastructure", "src\Infrastructure\Prohelika.Template.CleanArchitecture.Infrastructure\Prohelika.Template.CleanArchitecture.Infrastructure.csproj", "{22EBB013-6F4E-4E5C-81FE-1C93012C05AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.UnitTest", "test\Prohelika.Template.CleanArchitecture.UnitTest\Prohelika.Template.CleanArchitecture.UnitTest.csproj", "{1DF9D073-E058-4AC2-8A32-E9C86F26E8CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Presentation.WebAPI", "src\Presentation\Prohelika.Template.CleanArchitecture.Presentation.WebAPI\Prohelika.Template.CleanArchitecture.Presentation.WebAPI.csproj", "{754FFCF4-DD9B-4BC9-8070-6F9E001957B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Presentation.WebSSR", "src\Presentation\Prohelika.Template.CleanArchitecture.Presentation.WebSSR\Prohelika.Template.CleanArchitecture.Presentation.WebSSR.csproj", "{DB9F9CE7-2164-4572-BA86-D64CABCF5753}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Presentation.WebCSR", "src\Presentation\Prohelika.Template.CleanArchitecture.Presentation.WebCSR\Prohelika.Template.CleanArchitecture.Presentation.WebCSR.csproj", "{F5D8A670-876F-48C4-9507-D0E45B72B485}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prohelika.Template.CleanArchitecture.Presentation.WebComponents", "src\Presentation\Prohelika.Template.CleanArchitecture.Presentation.WebComponents\Prohelika.Template.CleanArchitecture.Presentation.WebComponents.csproj", "{8E5EA36D-DEA6-4457-B8CF-98A955F6388F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{DD1099F4-A436-4BBA-9DDB-E56AE47A8BC0}"
+	ProjectSection(SolutionItems) = preProject
+		build\docker-compose-prod.yml = build\docker-compose-prod.yml
+		build\docker-compose.yml = build\docker-compose.yml
+		build\manage.sh = build\manage.sh
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2499E091-1E43-4B40-A409-D1C56600F20D} = {C3FFAE90-A599-4F06-BE7A-AC05BDFA824E}
+		{46FB83BB-E0C1-42DD-9726-31B77AE95D31} = {C3FFAE90-A599-4F06-BE7A-AC05BDFA824E}
+		{481DE728-5BE0-481B-B043-D205E0D360B2} = {C3FFAE90-A599-4F06-BE7A-AC05BDFA824E}
+		{F94A2758-2BDB-4658-BA9C-516DD48C210A} = {C3FFAE90-A599-4F06-BE7A-AC05BDFA824E}
+		{D136B88C-2EF5-4F88-B728-4E6FBD766DB7} = {481DE728-5BE0-481B-B043-D205E0D360B2}
+		{4C333B83-A05D-4824-9652-B169F664D60A} = {2499E091-1E43-4B40-A409-D1C56600F20D}
+		{2A8C9C8A-9DB4-4484-A89F-C92556EA18BB} = {F94A2758-2BDB-4658-BA9C-516DD48C210A}
+		{35823AF9-51A1-49D2-9755-939D9D4735B9} = {46FB83BB-E0C1-42DD-9726-31B77AE95D31}
+		{B24AF84C-DE66-4975-98C5-E872AC41D3CA} = {46FB83BB-E0C1-42DD-9726-31B77AE95D31}
+		{CF7F5E51-DA33-4742-AD84-2847E4389F87} = {2499E091-1E43-4B40-A409-D1C56600F20D}
+		{22EBB013-6F4E-4E5C-81FE-1C93012C05AA} = {481DE728-5BE0-481B-B043-D205E0D360B2}
+		{1DF9D073-E058-4AC2-8A32-E9C86F26E8CB} = {797378FD-2132-4D71-9051-9BCB88AC6CA8}
+		{754FFCF4-DD9B-4BC9-8070-6F9E001957B8} = {F94A2758-2BDB-4658-BA9C-516DD48C210A}
+		{DB9F9CE7-2164-4572-BA86-D64CABCF5753} = {F94A2758-2BDB-4658-BA9C-516DD48C210A}
+		{F5D8A670-876F-48C4-9507-D0E45B72B485} = {F94A2758-2BDB-4658-BA9C-516DD48C210A}
+		{8E5EA36D-DEA6-4457-B8CF-98A955F6388F} = {F94A2758-2BDB-4658-BA9C-516DD48C210A}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D136B88C-2EF5-4F88-B728-4E6FBD766DB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D136B88C-2EF5-4F88-B728-4E6FBD766DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D136B88C-2EF5-4F88-B728-4E6FBD766DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D136B88C-2EF5-4F88-B728-4E6FBD766DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C333B83-A05D-4824-9652-B169F664D60A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C333B83-A05D-4824-9652-B169F664D60A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C333B83-A05D-4824-9652-B169F664D60A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C333B83-A05D-4824-9652-B169F664D60A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A8C9C8A-9DB4-4484-A89F-C92556EA18BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8C9C8A-9DB4-4484-A89F-C92556EA18BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8C9C8A-9DB4-4484-A89F-C92556EA18BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8C9C8A-9DB4-4484-A89F-C92556EA18BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35823AF9-51A1-49D2-9755-939D9D4735B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35823AF9-51A1-49D2-9755-939D9D4735B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35823AF9-51A1-49D2-9755-939D9D4735B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35823AF9-51A1-49D2-9755-939D9D4735B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B24AF84C-DE66-4975-98C5-E872AC41D3CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B24AF84C-DE66-4975-98C5-E872AC41D3CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B24AF84C-DE66-4975-98C5-E872AC41D3CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B24AF84C-DE66-4975-98C5-E872AC41D3CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF7F5E51-DA33-4742-AD84-2847E4389F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF7F5E51-DA33-4742-AD84-2847E4389F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF7F5E51-DA33-4742-AD84-2847E4389F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF7F5E51-DA33-4742-AD84-2847E4389F87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22EBB013-6F4E-4E5C-81FE-1C93012C05AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22EBB013-6F4E-4E5C-81FE-1C93012C05AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22EBB013-6F4E-4E5C-81FE-1C93012C05AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22EBB013-6F4E-4E5C-81FE-1C93012C05AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DF9D073-E058-4AC2-8A32-E9C86F26E8CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF9D073-E058-4AC2-8A32-E9C86F26E8CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF9D073-E058-4AC2-8A32-E9C86F26E8CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF9D073-E058-4AC2-8A32-E9C86F26E8CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{754FFCF4-DD9B-4BC9-8070-6F9E001957B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{754FFCF4-DD9B-4BC9-8070-6F9E001957B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{754FFCF4-DD9B-4BC9-8070-6F9E001957B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{754FFCF4-DD9B-4BC9-8070-6F9E001957B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB9F9CE7-2164-4572-BA86-D64CABCF5753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB9F9CE7-2164-4572-BA86-D64CABCF5753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB9F9CE7-2164-4572-BA86-D64CABCF5753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB9F9CE7-2164-4572-BA86-D64CABCF5753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5D8A670-876F-48C4-9507-D0E45B72B485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5D8A670-876F-48C4-9507-D0E45B72B485}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5D8A670-876F-48C4-9507-D0E45B72B485}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5D8A670-876F-48C4-9507-D0E45B72B485}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E5EA36D-DEA6-4457-B8CF-98A955F6388F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E5EA36D-DEA6-4457-B8CF-98A955F6388F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E5EA36D-DEA6-4457-B8CF-98A955F6388F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E5EA36D-DEA6-4457-B8CF-98A955F6388F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

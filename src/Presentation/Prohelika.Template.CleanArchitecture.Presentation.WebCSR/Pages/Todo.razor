@@ -1,0 +1,109 @@
+@page "/Todo"
+@using Microsoft.AspNetCore.Authorization
+@using Prohelika.Template.CleanArchitecture.Application.Features.Todos
+@using Prohelika.Template.CleanArchitecture.Presentation.Common.Utils
+
+@attribute [Authorize(policy: AppAuthPolicy.IsAdmin)]
+
+<h3>Todos</h3>
+
+<EditForm Model="TodoCreateDto" OnValidSubmit="Add">
+    <ValidationSummary Model="TodoCreateDto"></ValidationSummary>
+
+    <InputText @bind-Value="TodoCreateDto.Title"/>
+    <button class="btn btn-primary">Add</button>
+</EditForm>
+
+<table class="table">
+    <thead>
+    <th>#</th>
+    <th>Title</th>
+    <th>Completed</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    @foreach (var (todo, i) in Todos.Select((todo, i) => (todo, i)))
+    {
+        <tr>
+            <td>@(i + 1)</td>
+            <td>@todo.Title</td>
+            <td>
+                <InputCheckbox @bind-Value="todo.Completed" @onchange="() => Update(todo)"/>
+            </td>
+            <td>
+                <button @onclick="() => Delete(todo.Id)">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+    [Inject] private HttpClient Http { get; set; }
+
+    private TodoCreateDto TodoCreateDto { get; } = new();
+
+    private IList<TodoDto> Todos { get; set; } = new List<TodoDto>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Get();
+    }
+
+    private async Task Get()
+    {
+        try
+        {
+            Todos = await Http.GetFromJsonAsync<IList<TodoDto>>("Todo") ?? new List<TodoDto>();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+    }
+
+    private async Task Delete(Guid todoId)
+    {
+        try
+        {
+            await Http.DeleteAsync($"Todo/{todoId}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        await Get();
+    }
+
+    private async Task Update(TodoDto todo)
+    {
+        try
+        {
+            await Http.PutAsJsonAsync($"Todo/{todo.Id}", todo);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        await Get();
+    }
+
+    private async Task Add()
+    {
+        try
+        {
+            await Http.PostAsJsonAsync("Todo", TodoCreateDto);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        await Get();
+    }
+
+}
