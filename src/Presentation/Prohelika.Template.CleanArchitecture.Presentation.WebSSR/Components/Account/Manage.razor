@@ -1,0 +1,19 @@
+@page "/Account/Manage"
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
+<main id="main">
+    <div class="container mt-4">
+        <AuthorizeView>
+            <Authorized>
+                <PageTitle>@context.User.Identity?.Name - Manage</PageTitle>
+
+                <h1>Manage</h1>
+
+                <p>@context.User.Identity?.Name</p>
+
+                <a href="/Account/Logout" class="btn btn-danger">Logout</a>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</main>

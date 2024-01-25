@@ -4,14 +4,14 @@
     external: true
 
 volumes:
-  db.data:
+  prohelika.template.cleanarchitecture.db.data:
     driver: local
   
-  files:
+  prohelika.template.cleanarchitecture.files:
     driver: local
 
 services:
-  db:
+  prohelika.template.cleanarchitecture.db:
     image: postgres:16.1-alpine
     environment:
       POSTGRES_USER: db.user
@@ -20,10 +20,10 @@ services:
     ports:
       - "5432"
     volumes:
-      - db.data:/var/lib/postgresql/data
+      - prohelika.template.cleanarchitecture.db.data:/var/lib/postgresql/data
     restart: unless-stopped
   
-  webapi:
+  prohelika.template.cleanarchitecture.webapi:
     image: prohelika.template.cleanarchitecture.webapi:latest
     build:
       context: ..
@@ -37,10 +37,10 @@ services:
     expose:
       - 8080
     depends_on:
-      - db
+      - prohelika.template.cleanarchitecture.db
     restart: unless-stopped
 
-  webcsr:
+  prohelika.template.cleanarchitecture.webcsr:
     image: prohelika.template.cleanarchitecture.webcsr:latest
     build:
       context: ..
@@ -53,10 +53,10 @@ services:
     expose:
       - 80
     depends_on:
-      - webapi
+      - prohelika.template.cleanarchitecture.webapi
     restart: unless-stopped
 
-  webssr:
+  prohelika.template.cleanarchitecture.webssr:
     image: prohelika.template.cleanarchitecture.webssr:latest
     build:
       context: ..
@@ -69,5 +69,5 @@ services:
     expose:
       - 8080
     depends_on:
-      - webapi
+      - prohelika.template.cleanarchitecture.webapi
     restart: unless-stopped

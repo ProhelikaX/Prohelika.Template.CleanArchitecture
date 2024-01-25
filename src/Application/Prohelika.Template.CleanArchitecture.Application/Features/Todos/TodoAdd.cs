@@ -7,26 +7,26 @@ using Prohelika.Template.CleanArchitecture.Domain.UnitOfWorks;
 
 namespace Prohelika.Template.CleanArchitecture.Application.Features.Todos;
 
-public record AddTodo(string? UserId, TodoCreateDto Todo) : IRequest<TodoDto>;
+public record TodoAdd(string? UserId, TodoCreateDto Todo) : IRequest<TodoDto>;
 
-public class AddTodoHandler(IUnitOfWork unitOfWork, IMapper mapper) : BaseRequestHandler<AddTodo, TodoDto>(
-    unitOfWork, mapper)
+public class TodoAddHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    : BaseRequestHandler<TodoAdd, TodoDto>(unitOfWork, mapper)
 {
-    public override async Task<TodoDto> Handle(AddTodo request, CancellationToken cancellationToken)
+    public override async Task<TodoDto> Handle(TodoAdd request, CancellationToken cancellationToken)
     {
         if (request.UserId == null)
         {
             throw new ForbiddenException();
         }
 
-        var entity = mapper.Map<Todo>(request.Todo);
+        var entity = Mapper.Map<Todo>(request.Todo);
 
         entity.CreatedBy = request.UserId;
 
-        await unitOfWork.Todos.AddAsync(entity, cancellationToken);
+        await UnitOfWork.Todos.AddAsync(entity, cancellationToken);
 
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+        await UnitOfWork.SaveChangesAsync(cancellationToken);
 
-        return mapper.Map<TodoDto>(entity);
+        return Mapper.Map<TodoDto>(entity);
     }
 }

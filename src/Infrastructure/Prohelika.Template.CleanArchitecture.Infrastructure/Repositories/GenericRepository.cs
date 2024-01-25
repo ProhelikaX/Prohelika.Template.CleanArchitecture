@@ -6,24 +6,20 @@ using Prohelika.Template.CleanArchitecture.Infrastructure.Data;
 
 namespace Prohelika.Template.CleanArchitecture.Infrastructure.Repositories;
 
-public class GenericRepository<TEntity, TId> : IGenericRepository<TEntity, TId> where TEntity : BaseEntity<TId>
+public abstract class GenericRepository<TEntity, TId>(ApplicationDbContext context) : IGenericRepository<TEntity, TId>
+    where TEntity : BaseEntity<TId>
 {
-    protected readonly DbSet<TEntity> DbSet;
-
-    protected GenericRepository(ApplicationDbContext context)
-    {
-        DbSet = context.Set<TEntity>();
-    }
+    protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
 
     public async Task<IReadOnlyList<TEntity>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await DbSet.ToListAsync(cancellationToken: cancellationToken);
+        return await DbSet.AsNoTracking().ToListAsync(cancellationToken: cancellationToken);
     }
 
     public async Task<IReadOnlyList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate,
         CancellationToken cancellationToken = default)
     {
-        return await DbSet.Where(predicate).ToListAsync(cancellationToken: cancellationToken);
+        return await DbSet.AsNoTracking().Where(predicate).ToListAsync(cancellationToken: cancellationToken);
     }
 
     public async Task<TEntity?> GetByIdAsync(TId id, CancellationToken cancellationToken = default)

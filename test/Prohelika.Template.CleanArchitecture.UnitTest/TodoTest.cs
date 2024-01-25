@@ -54,9 +54,9 @@ public class TodoTest : IDisposable, IAsyncDisposable
     [Fact]
     public async Task GetAllTodoHandler_Returns_All_Todos()
     {
-        var handler = new GetAllTodoHandler(_unitOfWork, _mapper);
+        var handler = new TodoGetAllHandler(_unitOfWork, _mapper);
 
-        var result = await handler.Handle(new GetAllTodo(), CancellationToken.None);
+        var result = await handler.Handle(new TodoGetAll(), CancellationToken.None);
 
         Assert.Equal(3, result.Count());
     }
@@ -64,9 +64,9 @@ public class TodoTest : IDisposable, IAsyncDisposable
     [Fact]
     public async Task GetTodoById_Throws_NotFoundException_With_NewGuid()
     {
-        var handler = new GetTodoByIdHandler(_unitOfWork, _mapper);
+        var handler = new TodoGetByIdHandler(_unitOfWork, _mapper);
 
-        var result = handler.Handle(new GetTodoById(Guid.NewGuid()), CancellationToken.None);
+        var result = handler.Handle(new TodoGetById(Guid.NewGuid()), CancellationToken.None);
 
         await Assert.ThrowsAsync<NotFoundException>(() => result);
     }
@@ -74,10 +74,10 @@ public class TodoTest : IDisposable, IAsyncDisposable
     [Fact]
     public async Task Todo_Created_Successfully()
     {
-        var handler = new AddTodoHandler(_unitOfWork, _mapper);
+        var handler = new TodoAddHandler(_unitOfWork, _mapper);
 
         var todo = new TodoCreateDto { Title = "Test" };
-        var result = await handler.Handle(new AddTodo("testuser", todo), CancellationToken.None);
+        var result = await handler.Handle(new TodoAdd("testuser", todo), CancellationToken.None);
 
         Assert.NotNull(result);
 
@@ -89,13 +89,13 @@ public class TodoTest : IDisposable, IAsyncDisposable
     [Fact]
     public async Task Todo_Updated_Successfully()
     {
-        var handler = new UpdateTodoHandler(_unitOfWork, _mapper);
+        var handler = new TodoUpdateHandler(_unitOfWork, _mapper);
 
         var todo = (await _unitOfWork.Todos.GetAllAsync()).First();
         todo.Title = "Test";
         todo.Completed = true;
 
-        var result = await handler.Handle(new UpdateTodo(todo.Id, _mapper.Map<TodoDto>(todo)), CancellationToken.None);
+        var result = await handler.Handle(new TodoUpdate(todo.Id, _mapper.Map<TodoDto>(todo)), CancellationToken.None);
 
         Assert.NotNull(result);
 
@@ -105,11 +105,11 @@ public class TodoTest : IDisposable, IAsyncDisposable
     [Fact]
     public async Task Todo_Deleted_Successfully()
     {
-        var handler = new DeleteTodoHandler(_unitOfWork, _mapper);
+        var handler = new TodoDeleteHandler(_unitOfWork, _mapper);
 
         var todo = (await _unitOfWork.Todos.GetAllAsync())[0];
 
-        await handler.Handle(new DeleteTodo(todo.Id), CancellationToken.None);
+        await handler.Handle(new TodoDelete(todo.Id), CancellationToken.None);
 
         Assert.Equal(2, await _unitOfWork.Todos.CountAsync());
     }

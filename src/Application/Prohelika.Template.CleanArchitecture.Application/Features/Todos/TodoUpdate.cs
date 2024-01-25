@@ -6,12 +6,14 @@ using Prohelika.Template.CleanArchitecture.Domain.UnitOfWorks;
 
 namespace Prohelika.Template.CleanArchitecture.Application.Features.Todos;
 
-public record UpdateTodo(Guid Id, TodoDto Todo) : IRequest<TodoDto>;
+public record TodoUpdate(Guid Id, TodoDto Todo) : IRequest<TodoDto>;
 
-public class UpdateTodoHandler
-    (IUnitOfWork unitOfWork, IMapper mapper) : BaseRequestHandler<UpdateTodo, TodoDto>(unitOfWork, mapper)
+public class TodoUpdateHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    : BaseRequestHandler<TodoUpdate, TodoDto>(unitOfWork, mapper)
 {
-    public override async Task<TodoDto> Handle(UpdateTodo request, CancellationToken cancellationToken)
+   
+
+    public override async Task<TodoDto> Handle(TodoUpdate request, CancellationToken cancellationToken)
     {
         if (request.Todo.Id != request.Id)
         {
@@ -19,20 +21,20 @@ public class UpdateTodoHandler
         }
 
         var entity =
-            await unitOfWork.Todos.GetByIdAsync(request.Id, cancellationToken);
+            await UnitOfWork.Todos.GetByIdAsync(request.Id, cancellationToken);
 
         if (entity == null)
         {
             throw new NotFoundException();
         }
 
-        mapper.Map(request.Todo, entity);
+        Mapper.Map(request.Todo, entity);
         entity.UpdatedAt = DateTimeOffset.UtcNow;
         
-       var  result = unitOfWork.Todos.Update(entity);
+       var  result = UnitOfWork.Todos.Update(entity);
 
-        await unitOfWork.SaveChangesAsync(cancellationToken);
+        await UnitOfWork.SaveChangesAsync(cancellationToken);
 
-        return mapper.Map<TodoDto>(result);
+        return Mapper.Map<TodoDto>(result);
     }
 }

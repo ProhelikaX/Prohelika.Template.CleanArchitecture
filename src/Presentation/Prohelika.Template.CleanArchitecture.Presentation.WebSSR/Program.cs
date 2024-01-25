@@ -1,4 +1,3 @@
-using Prohelika.Template.CleanArchitecture.Presentation.WebSSR.Components;
 using Prohelika.Template.CleanArchitecture.Presentation.WebSSR.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -19,7 +19,7 @@ public class TodoController(IMediator mediator) : BaseController(mediator)
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TodoDto>>> Get()
     {
-        var response = await Mediator.Send(new GetAllTodo());
+        var response = await Mediator.Send(new TodoGetAll());
 
         return Ok(response);
     }
@@ -32,7 +32,7 @@ public class TodoController(IMediator mediator) : BaseController(mediator)
     [HttpGet("{id}")]
     public async Task<ActionResult<TodoDto>> Get(Guid id)
     {
-        var response = await Mediator.Send(new GetTodoById(id));
+        var response = await Mediator.Send(new TodoGetById(id));
 
         return Ok(response);
     }
@@ -45,7 +45,7 @@ public class TodoController(IMediator mediator) : BaseController(mediator)
     [HttpPost]
     public async Task<ActionResult<TodoDto>> Create(TodoCreateDto todoCreateDto)
     {
-        var response = await Mediator.Send(new AddTodo(User.GetId(), todoCreateDto));
+        var response = await Mediator.Send(new TodoAdd(User.GetId(), todoCreateDto));
 
         return CreatedAtAction(nameof(Get), new { response.Id }, response);
     }
@@ -59,7 +59,7 @@ public class TodoController(IMediator mediator) : BaseController(mediator)
     [HttpPut("{id}")]
     public async Task<ActionResult<TodoDto>> Update(Guid id, TodoDto todoDto)
     {
-        var response = await Mediator.Send(new UpdateTodo(id, todoDto));
+        var response = await Mediator.Send(new TodoUpdate(id, todoDto));
 
         return Ok(response);
     }
@@ -72,7 +72,7 @@ public class TodoController(IMediator mediator) : BaseController(mediator)
     [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(Guid id)
     {
-        await Mediator.Send(new DeleteTodo(id));
+        await Mediator.Send(new TodoDelete(id));
 
         return NoContent();
     }

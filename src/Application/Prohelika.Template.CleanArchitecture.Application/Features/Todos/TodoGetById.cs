@@ -7,21 +7,21 @@ using Prohelika.Template.CleanArchitecture.Domain.UnitOfWorks;
 
 namespace Prohelika.Template.CleanArchitecture.Application.Features.Todos;
 
-public record GetTodoById(Guid Id) : IRequest<TodoDto>;
+public record TodoGetById(Guid Id) : IRequest<TodoDto>;
 
-public class GetTodoByIdHandler
-    (IUnitOfWork unitOfWork, IMapper mapper) : BaseRequestHandler<GetTodoById, TodoDto>(unitOfWork, mapper)
+public class TodoGetByIdHandler(IUnitOfWork unitOfWork, IMapper mapper)
+    : BaseRequestHandler<TodoGetById, TodoDto>(unitOfWork, mapper)
 {
-    public override async Task<TodoDto> Handle(GetTodoById request, CancellationToken cancellationToken)
+    public override async Task<TodoDto> Handle(TodoGetById request, CancellationToken cancellationToken)
     {
         var entity =
-            await unitOfWork.Todos.GetByIdAsync(request.Id, cancellationToken);
+            await UnitOfWork.Todos.GetByIdAsync(request.Id, cancellationToken);
 
         if (entity == null)
         {
             throw new NotFoundException(nameof(Todo), request.Id);
         }
 
-        return mapper.Map<TodoDto>(entity);
+        return Mapper.Map<TodoDto>(entity);
     }
 }

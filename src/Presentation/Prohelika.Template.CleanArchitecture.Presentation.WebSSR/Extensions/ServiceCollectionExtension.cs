@@ -28,6 +28,8 @@ public static class ServiceCollectionExtension
             .AddInteractiveServerComponents();
 
         services.AddHttpContextAccessor();
+        
+        services.AddCascadingAuthenticationState();
 
         services.AddScoped<CustomAuthorizationMessageHandler>();
 

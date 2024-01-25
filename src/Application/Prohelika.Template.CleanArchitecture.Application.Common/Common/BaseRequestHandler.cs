@@ -13,6 +13,8 @@ public abstract class BaseRequestHandler<TRequest, TResponse>
     (IUnitOfWork unitOfWork, IMapper mapper) : IRequestHandler<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
+    public IUnitOfWork UnitOfWork { get; } = unitOfWork;
+    public IMapper Mapper { get; } = mapper;
     public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
 }
 
@@ -24,5 +26,7 @@ public abstract class BaseRequestHandler<TRequest>
     (IUnitOfWork unitOfWork, IMapper mapper) : IRequestHandler<TRequest>
     where TRequest : IRequest
 {
+    public IUnitOfWork UnitOfWork { get; } = unitOfWork;
+    public IMapper Mapper { get; } = mapper;
     public abstract Task Handle(TRequest request, CancellationToken cancellationToken);
 }
