@@ -43,67 +43,36 @@
 @code {
     [Inject] private HttpClient Http { get; set; }
 
+    [Inject] private NavigationManager NavigationManager { get; set; }
+
     private TodoCreateDto TodoCreateDto { get; } = new();
 
     private IList<TodoDto> Todos { get; set; } = new List<TodoDto>();
 
     protected override async Task OnInitializedAsync()
     {
-        await Get();
-    }
-
-    private async Task Get()
-    {
-        try
-        {
-            Todos = await Http.GetFromJsonAsync<IList<TodoDto>>("Todo") ?? new List<TodoDto>();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        Todos = await Http.GetFromJsonAsync<IList<TodoDto>>("Todo") ?? new List<TodoDto>();
     }
 
     private async Task Delete(Guid todoId)
     {
-        try
-        {
-            await Http.DeleteAsync($"Todo/{todoId}");
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        await Http.DeleteAsync($"Todo/{todoId}");
 
-        await Get();
+        NavigationManager.Refresh();
     }
 
     private async Task Update(TodoDto todo)
     {
-        try
-        {
-            await Http.PutAsJsonAsync($"Todo/{todo.Id}", todo);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        await Http.PutAsJsonAsync($"Todo/{todo.Id}", todo);
 
-        await Get();
+        NavigationManager.Refresh();
     }
 
     private async Task Add()
     {
-        try
-        {
-            await Http.PostAsJsonAsync("Todo", TodoCreateDto);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
+        await Http.PostAsJsonAsync("Todo", TodoCreateDto);
 
-        await Get();
+        NavigationManager.Refresh();
     }
 
 }

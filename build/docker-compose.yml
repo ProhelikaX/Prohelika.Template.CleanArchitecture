@@ -16,6 +16,7 @@ services:
       - "5432:5432"
     volumes:
       - prohelika.template.cleanarchitecture.db.data:/var/lib/postgresql/data
+    restart: unless-stopped
   
   prohelika.template.cleanarchitecture.webapi:
     image: prohelika.template.cleanarchitecture.webapi:latest

@@ -29,10 +29,9 @@ services:
       context: ..
       dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebAPI/Dockerfile
     environment:
-      - VIRTUAL_HOST=prohelika.template.cleanarchitecture
-      - VIRTUAL_PATH=/api,/swagger
+      - VIRTUAL_HOST=api.prohelika.template.cleanarchitecture
       - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=prohelika.template.cleanarchitecture
+      - LETSENCRYPT_HOST=api.prohelika.template.cleanarchitecture
       - LETSENCRYPT_EMAIL=admin@prohelika.template.cleanarchitecture
     expose:
       - 8080
@@ -62,9 +61,9 @@ services:
       context: ..
       dockerfile: src/Presentation/Prohelika.Template.CleanArchitecture.Presentation.WebSSR/Dockerfile
     environment:
-      - VIRTUAL_HOST=prohelika.template.cleanarchitecture, www.prohelika.template.cleanarchitecture
+      - VIRTUAL_HOST=prohelika.template.cleanarchitecture,www.prohelika.template.cleanarchitecture
       - VIRTUAL_PORT=8080
-      - LETSENCRYPT_HOST=prohelika.template.cleanarchitecture, www.prohelika.template.cleanarchitecture
+      - LETSENCRYPT_HOST=prohelika.template.cleanarchitecture,www.prohelika.template.cleanarchitecture
       - LETSENCRYPT_EMAIL=admin@prohelika.template.cleanarchitecture
     expose:
       - 8080

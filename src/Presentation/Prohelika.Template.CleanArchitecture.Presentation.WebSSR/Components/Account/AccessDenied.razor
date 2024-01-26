@@ -17,10 +17,6 @@
         if (Accessor.HttpContext != null)
         {
             var state = await AuthenticationState;
-
-            var isin = state.User.IsInRole("admin");
-
-            Console.WriteLine(isin);
         }
     }
 

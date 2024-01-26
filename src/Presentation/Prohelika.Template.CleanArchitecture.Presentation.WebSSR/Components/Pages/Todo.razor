@@ -33,22 +33,9 @@
     [Inject] private HttpClient Http { get; set; }
     private IList<TodoDto> Todos { get; set; } = new List<TodoDto>();
 
-    protected override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-        return Get();
+        Todos = await Http.GetFromJsonAsync<IList<TodoDto>>("Todo") ?? new List<TodoDto>();
     }
-
-    private async Task Get()
-    {
-        try
-        {
-            Todos = await Http.GetFromJsonAsync<IList<TodoDto>>("Todo") ?? new List<TodoDto>();
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-    }
-
 
 }
